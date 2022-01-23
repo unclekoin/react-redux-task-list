@@ -5,7 +5,7 @@ import Detail from '../routes/detail';
 
 const App = () => {
   return (
-    <div className="container">
+    <div className="container pt-5">
       <Switch>
         <Route path="/:id" component={Detail} />
         <Route path="/" component={Home} />
