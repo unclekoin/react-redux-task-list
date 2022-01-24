@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import Task from '../components/task';
+import { actionCreators } from '../store';
 
-const Home = () => {
+const Home = ({ tasks, addTask }) => {
   const [text, setText] = useState('');
+
 
   const onChange = ({ target }) => {
     setText(target.value);
@@ -9,14 +13,17 @@ const Home = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    addTask(text);
     setText('');
-    console.log(text);
-  }
+  };
 
   return (
     <>
       <h1 className="text-center">Tasks List</h1>
-      <form onSubmit={onSubmit} className="d-flex justify-content-between align-items-center mb-5">
+      <form
+        onSubmit={onSubmit}
+        className="d-flex justify-content-between align-items-center mb-5"
+      >
         <input
           type="text"
           value={text}
@@ -29,13 +36,20 @@ const Home = () => {
         </button>
       </form>
       <ul className="list-group">
-        <li className="list-group-item d-flex justify-content-between align-items-center">
-          <span>An item</span>
-          <i className="bi bi-x fs-4" role="button" />
-        </li>
+        {tasks.map((task) => <Task key={task.id} {...task} />)}
       </ul>
     </>
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => {
+  return { tasks: state };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addTask: (text) => dispatch(actionCreators.addTask(text))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
