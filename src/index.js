@@ -5,10 +5,10 @@ import { Provider } from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import App from './components/app';
-import store from './store';
+import taskStore from './store';
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={taskStore}>
     <Router>
       <App />
     </Router>

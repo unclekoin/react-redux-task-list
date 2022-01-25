@@ -3,14 +3,14 @@ import { createStore } from 'redux';
 const ADD_TASK = 'ADD_TASK';
 const REMOVE_TASK = 'REMOVE_TASK';
 
-export const addTask = (text) => {
+const addTask = (text) => {
   return {
     type: ADD_TASK,
     payload: { id: Date.now().toString(), text },
   };
 };
 
-export const removeTask = (id) => {
+const removeTask = (id) => {
   return {
     type: REMOVE_TASK,
     payload: { id },

@@ -6,20 +6,19 @@ import { actionCreators } from '../store';
 const Home = ({ tasks, addTask }) => {
   const [text, setText] = useState('');
 
-
   const onChange = ({ target }) => {
     setText(target.value);
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addTask(text);
+    if (text.trim()) addTask(text);
     setText('');
   };
 
   return (
     <>
-      <h1 className="text-center">Tasks List</h1>
+      <h1 className="text-center mb-4">Task List</h1>
       <form
         onSubmit={onSubmit}
         className="d-flex justify-content-between align-items-center mb-5"
@@ -36,7 +35,9 @@ const Home = ({ tasks, addTask }) => {
         </button>
       </form>
       <ul className="list-group">
-        {tasks.map((task) => <Task key={task.id} {...task} />)}
+        {tasks.map((task) => (
+          <Task key={task.id} {...task} />
+        ))}
       </ul>
     </>
   );
@@ -48,7 +49,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addTask: (text) => dispatch(actionCreators.addTask(text))
+    addTask: (text) => dispatch(actionCreators.addTask(text)),
   };
 };
 
